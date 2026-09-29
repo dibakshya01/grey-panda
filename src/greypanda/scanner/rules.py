@@ -186,6 +186,20 @@ RULES: list[Rule] = [
         file_globs=("requirements*.txt", "pyproject.toml", "setup.cfg", "Pipfile"),
         sdk="",
     ),
+    Rule(
+        id="GP-AI-023",
+        owasp_id="LLM04:2026",
+        severity=HIGH,
+        title="Disabled TLS certificate verification on outbound call",
+        description="An outbound HTTP/API or MCP client call disables TLS certificate "
+                    "verification (verify=False), exposing prompts, keys, and "
+                    "responses to man-in-the-middle interception.",
+        remediation="Remove verify=False (or set verify=True / pass a trusted CA bundle "
+                    "path) so TLS certificates are validated on all outbound calls.",
+        pattern=r"""(?ix)\bverify\s*=\s*False\b""",
+        suppress=r"verify\s*=\s*True|#\s*grey-?panda:\s*ignore",
+        sdk="",
+    ),
 
     # ------------------------ LLM06 Unbounded ---------------------------- #
     Rule(
