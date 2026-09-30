@@ -196,7 +196,11 @@ RULES: list[Rule] = [
                     "responses to man-in-the-middle interception.",
         remediation="Remove verify=False (or set verify=True / pass a trusted CA bundle "
                     "path) so TLS certificates are validated on all outbound calls.",
-        pattern=r"""(?ix)\bverify\s*=\s*False\b""",
+        # Fire only when an HTTP client / request call is on the same line, so an
+        # unrelated `verify=False` kwarg (a config flag, a dataclass field) is not
+        # falsely flagged. Cross-line calls and aliased sessions are out of scope
+        # for this line-based rule — the taint engine is the better home for those.
+        pattern=r"""(?ix)(?:\b(?:requests|httpx|aiohttp|urllib3|session|client)\b|\.(?:get|post|put|patch|delete|head|request)\s*\()[^\n]*\bverify\s*=\s*False\b""",
         suppress=r"verify\s*=\s*True|#\s*grey-?panda:\s*ignore",
         sdk="",
     ),
