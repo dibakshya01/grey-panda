@@ -71,3 +71,7 @@ of defense in depth**, never as "injection-proof." The complete, honest breakdow
 - Shipping an agent or MCP server? → **[Module 4 — MCP & Agent Security Kit](../Module%204%20-%20MCP%20and%20Agent%20Security%20Kit)**
 - Want a CI gate? → **[Module 3 — Scanner & CI/CD Kit](../Module%203%20-%20Scanner%20and%20CI-CD%20Kit)**
 - Getting reviewed by security? → **[Module 2 — Security Reviewer Kit](../Module%202%20-%20Security%20Reviewer%20Kit)**
+
+## Runnable HTTP example
+
+See [Guard a FastAPI LLM endpoint](../examples/fastapi_llm/README.md) for a local, offline model stub and tested input/DLP/output pipeline.
